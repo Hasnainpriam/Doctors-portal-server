@@ -196,6 +196,15 @@ app.get('/appointmentSpecialty', async (req, res) => {
         //     res.send(result);
         // })
 
+        app.get('/bookingstoday', async (req, res) => {
+
+            const date = req.query.date;
+            const bookingQuery = { appointmentDate: date }
+            const bookingsToday = await bookingsCollection.find(bookingQuery).toArray();
+            res.send(bookingsToday)
+
+        })
+
         app.get('/bookings/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
